@@ -18,7 +18,8 @@
  *      - expires_at   = 最新決済日 + 1年
  *      - status       = 期限内なら 'active'、期限切れなら 'expired'
  */
-import 'dotenv/config'
+import { config } from 'dotenv'
+config({ path: '.env.local' })
 import { createClient } from '@supabase/supabase-js'
 import { SquareClient, SquareEnvironment } from 'square'
 
