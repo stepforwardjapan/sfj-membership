@@ -14,8 +14,11 @@ config({ path: '.env.local' })
 import { createClient } from '@supabase/supabase-js'
 
 const email = process.argv[2]
+const siteUrlArg = process.argv[3]
 if (!email) {
-  console.error('Usage: pnpm tsx scripts/create-admin-user.ts <email>')
+  console.error('Usage: pnpm tsx scripts/create-admin-user.ts <email> [siteUrl]')
+  console.error('  siteUrl default: NEXT_PUBLIC_SITE_URL from .env.local')
+  console.error('  example: pnpm tsx scripts/create-admin-user.ts a@b.com https://sfj-membership.vercel.app')
   process.exit(1)
 }
 
@@ -50,9 +53,7 @@ async function main() {
     type: 'magiclink',
     email,
     options: {
-      redirectTo: process.env.NEXT_PUBLIC_SITE_URL
-        ? `${process.env.NEXT_PUBLIC_SITE_URL}/admin`
-        : 'http://localhost:3000/admin',
+      redirectTo: `${siteUrlArg ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'}/auth/callback?next=/admin`,
     },
   })
 
