@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * SFJ Brand + Omata Design System
+ * - Accent: teal #5bbfbf (single accent color, no exceptions)
+ * - Typography: Noto Sans JP (JP) / Raleway (EN)
+ * - Layout: 引き算の美学 — whitespace 1.5-2x, border-only dividers, no shadows
+ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Base palette */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f7f6f2;
+  --color-text: #141413;
+  --color-text-muted: #6b6b68;
+  --color-text-brown: #2d1f18;
+  --color-border: #e4e2db;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* SFJ brand */
+  --color-accent: #5bbfbf;
+  --color-accent-dark: #3d9999;
+  --color-accent-tint: #edf8f8;
+
+  /* Fonts */
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-display: var(--font-display), system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+/* Labels & nav — uppercase with tracking */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.6rem;
+  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Scroll fade-up animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.65s ease both;
 }
