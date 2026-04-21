@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { PlanGrid } from './PlanGrid'
 
 export const metadata: Metadata = {
   title: 'サポーターになる | Step Forward Japan',
-  description: '挑戦サポーター制度・法人協賛・寄付のお申込み。失敗できる社会を、一緒につくる。',
+  description:
+    '挑戦サポーター制度・法人協賛・寄付のお申込み。失敗できる社会を、一緒につくる。',
 }
 
 const PLANS = [
@@ -26,6 +28,7 @@ const PLANS = [
       'Podcast ゲスト出演（年1回）',
       'Web等への掲載（任意）',
     ],
+    requireAgreement: true,
   },
   {
     id: 'corporate',
@@ -39,12 +42,13 @@ const PLANS = [
     benefits: [
       '挑戦サポーター全特典',
       'SFJ公式サイトへの企業ロゴ掲載',
-      '社員・関係者の公開収録参加',
+      '社員・関係者の公開収録参加（3名まで）',
       'SFJイベントへの共催・協力',
       '組織づくりの相談・連携',
       'Podcast 企業枠出演',
     ],
     highlighted: true,
+    requireAgreement: true,
   },
   {
     id: 'donation',
@@ -56,6 +60,7 @@ const PLANS = [
     description:
       '活動への共感に応じて自由な額でご支援いただけます。サポーター特典は付きませんが、SFJの活動を継続的に支える力になります。',
     benefits: ['お礼のメッセージ', 'ご希望に応じて寄付者としての掲載'],
+    requireAgreement: false,
   },
 ] as const
 
@@ -95,11 +100,7 @@ export default function JoinPage() {
 
         <section className="border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
           <div className="max-w-6xl mx-auto px-6 py-24">
-            <div className="grid md:grid-cols-3 gap-px bg-[var(--color-border)] border border-[var(--color-border)]">
-              {PLANS.map((plan) => (
-                <PlanCard key={plan.id} plan={plan} />
-              ))}
-            </div>
+            <PlanGrid plans={PLANS} />
           </div>
         </section>
 
@@ -116,13 +117,13 @@ export default function JoinPage() {
               {[
                 {
                   n: '01',
-                  t: 'プランを選ぶ',
-                  d: '個人・法人・寄付の3つから、ご自身に合うかたちを選びます。迷う場合は個人会員がおすすめです。',
+                  t: 'プランを選ぶ・規約に同意する',
+                  d: '個人・法人・寄付の3つから、ご自身に合うかたちを選びます。会員プランをお選びの方は、会員規約をご確認のうえ同意チェックをお願いします。',
                 },
                 {
                   n: '02',
                   t: 'Square で情報入力・決済',
-                  d: '遷移先の Square 決済ページで、お名前・メール・決済情報をご入力いただきます。これらの情報はSFJが会員管理のために受け取ります。',
+                  d: '遷移先の Square 決済ページで、お名前・メール・決済情報をご入力いただきます。入力いただいた情報は SFJ が会員管理のために受け取ります。',
                 },
                 {
                   n: '03',
@@ -131,10 +132,7 @@ export default function JoinPage() {
                 },
               ].map((s) => (
                 <li key={s.n} className="grid grid-cols-[auto,1fr] gap-8">
-                  <div
-                    className="font-display font-bold text-2xl"
-                    style={{ color: 'var(--color-accent)' }}
-                  >
+                  <div className="font-display font-bold text-2xl" style={{ color: 'var(--color-accent)' }}>
                     {s.n}
                   </div>
                   <div>
@@ -149,7 +147,9 @@ export default function JoinPage() {
 
         <section className="bg-[var(--color-accent-tint)]">
           <div className="max-w-4xl mx-auto px-6 py-20 text-center">
-            <p className="text-sm text-[var(--color-text-muted)] mb-3">ご不明な点は下記までお気軽にご連絡ください</p>
+            <p className="text-sm text-[var(--color-text-muted)] mb-3">
+              ご不明な点は下記までお気軽にご連絡ください
+            </p>
             <a
               href="mailto:info@step-forward-japan.jp"
               className="font-display font-semibold text-[var(--color-text)] hover:text-[var(--color-accent-dark)] transition"
@@ -167,76 +167,5 @@ export default function JoinPage() {
         </div>
       </footer>
     </>
-  )
-}
-
-function PlanCard({
-  plan,
-}: {
-  plan: {
-    id: string
-    label: string
-    name: string
-    price: string
-    per: string
-    url: string
-    description: string
-    benefits: readonly string[]
-    highlighted?: boolean
-  }
-}) {
-  return (
-    <div
-      className={`bg-white p-8 md:p-10 flex flex-col ${
-        plan.highlighted ? 'ring-1 ring-[var(--color-accent)] relative' : ''
-      }`}
-    >
-      {plan.highlighted && (
-        <span
-          className="absolute top-0 right-0 text-[0.6rem] font-semibold tracking-widest uppercase text-white px-3 py-1"
-          style={{ background: 'var(--color-accent)' }}
-        >
-          Recommended
-        </span>
-      )}
-      <p className="eyebrow mb-4" style={{ color: 'var(--color-accent-dark)' }}>
-        {plan.label}
-      </p>
-      <h3 className="font-display font-bold text-xl mb-6 text-[var(--color-text)]">{plan.name}</h3>
-      <div className="flex items-end gap-2 mb-6">
-        <span className="font-display font-black text-4xl text-[var(--color-text)]">{plan.price}</span>
-        {plan.per && <span className="text-xs text-[var(--color-text-muted)] mb-2">{plan.per}</span>}
-      </div>
-      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-8">
-        {plan.description}
-      </p>
-      <ul className="space-y-3 text-sm text-[var(--color-text-muted)] mb-10 flex-grow">
-        {plan.benefits.map((b) => (
-          <li key={b} className="flex gap-3">
-            <svg width="14" height="14" viewBox="0 0 16 16" className="flex-shrink-0 mt-1.5" aria-hidden>
-              <path
-                d="M3 8L6.5 11.5L13 5"
-                fill="none"
-                stroke="var(--color-accent)"
-                strokeWidth="1.5"
-              />
-            </svg>
-            <span>{b}</span>
-          </li>
-        ))}
-      </ul>
-      <a
-        href={plan.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`block text-center py-4 text-sm transition ${
-          plan.highlighted
-            ? 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)]'
-            : 'bg-[var(--color-text)] text-white hover:opacity-85'
-        }`}
-      >
-        {plan.id === 'donation' ? 'Square で寄付する' : 'Square で申し込む'}
-      </a>
-    </div>
   )
 }

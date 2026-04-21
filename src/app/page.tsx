@@ -424,6 +424,7 @@ function SiteFooter() {
             <li><a href="https://step-forward-japan.jp/" className="hover:text-[var(--color-accent-dark)]">公式サイト</a></li>
             <li><a href="https://open.spotify.com/show/3PaXMIvEGMhOHMaIBiOKxl" className="hover:text-[var(--color-accent-dark)]">Podcast</a></li>
             <li><a href="https://step-forward-japan.jp/contact" className="hover:text-[var(--color-accent-dark)]">お問い合わせ</a></li>
+            <li><Link href="/terms" className="hover:text-[var(--color-accent-dark)]">会員規約</Link></li>
           </ul>
         </div>
         <div className="md:col-span-3">
