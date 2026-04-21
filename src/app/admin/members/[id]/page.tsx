@@ -45,15 +45,14 @@ export default async function MemberDetailPage({ params }: { params: Promise<{ i
 
           <Section title="契約情報">
             <Field label="ステータス" value={m.status} />
-            <Field label="登録日" value={formatDateTime(m.registered_at)} />
-            <Field label="今期開始" value={m.current_period_start ? formatDateTime(m.current_period_start) : null} />
-            <Field label="次回更新" value={m.current_period_end ? formatDateTime(m.current_period_end) : null} />
-            <Field label="解約予定" value={m.cancel_at ? formatDateTime(m.cancel_at) : null} />
+            <Field label="初回登録日" value={formatDateTime(m.registered_at)} />
+            <Field label="最終決済日" value={m.last_paid_at ? formatDateTime(m.last_paid_at) : null} />
+            <Field label="有効期限" value={m.expires_at ? formatDateTime(m.expires_at) : null} />
           </Section>
 
-          <Section title="Stripe連携">
-            <Field label="Customer ID" value={m.stripe_customer_id} mono />
-            <Field label="Subscription ID" value={m.stripe_subscription_id} mono />
+          <Section title="Square連携">
+            <Field label="Customer ID" value={m.square_customer_id} mono />
+            <Field label="Last Payment ID" value={m.last_square_payment_id} mono />
           </Section>
 
           <Section title="運営メモ">

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "import:stripe": "tsx scripts/import-stripe-customers.ts"
+    "import:square": "tsx scripts/import-square-customers.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
@@ -14,7 +14,7 @@
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "stripe": "^22.0.2"
+    "square": "^44.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

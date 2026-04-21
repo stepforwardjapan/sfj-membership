@@ -8,8 +8,8 @@
 [DB]                : Supabase (PostgreSQL)
 [決済]              : Stripe（現行: Payment Link → 移行先: Checkout + Billing + Webhooks）
 [メール]            : Resend（候補）
-[ホスティング]       : Vercel
-[ドメイン]           : step-forward-japan.jp（既存）
+[ホスティング]       : Vercel（SFJアカウント）
+[ドメイン]           : step-forward-japan.jp（既存。サブドメイン運用想定）
 ```
 
 ## 判断ポイント

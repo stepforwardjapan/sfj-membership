@@ -1,4 +1,4 @@
-export type MemberStatus = 'active' | 'past_due' | 'cancelled' | 'incomplete'
+export type MemberStatus = 'active' | 'expired' | 'cancelled'
 
 export interface Member {
   id: string
@@ -8,15 +8,14 @@ export interface Member {
   organization: string | null
   phone: string | null
   display_name: string | null
-  stripe_customer_id: string | null
-  stripe_subscription_id: string | null
+  square_customer_id: string | null
+  last_square_payment_id: string | null
   status: MemberStatus
-  current_period_start: string | null
-  current_period_end: string | null
-  cancel_at: string | null
+  registered_at: string
+  last_paid_at: string | null
+  expires_at: string | null
   notes: string | null
   invited_by: string | null
-  registered_at: string
   created_at: string
   updated_at: string
 }

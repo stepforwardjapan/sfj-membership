@@ -6,9 +6,8 @@ export const dynamic = 'force-dynamic'
 
 const statusLabel: Record<string, { label: string; color: string }> = {
   active: { label: '有効', color: 'bg-green-100 text-green-800' },
-  past_due: { label: '支払い遅延', color: 'bg-yellow-100 text-yellow-800' },
+  expired: { label: '期限切れ', color: 'bg-orange-100 text-orange-800' },
   cancelled: { label: '解約', color: 'bg-gray-100 text-gray-800' },
-  incomplete: { label: '未完了', color: 'bg-orange-100 text-orange-800' },
 }
 
 export default async function AdminMembersPage() {
@@ -27,7 +26,13 @@ export default async function AdminMembersPage() {
   }
 
   const list = (members ?? []) as Member[]
+  const now = Date.now()
   const activeCount = list.filter((m) => m.status === 'active').length
+  const expiringSoon = list.filter((m) => {
+    if (m.status !== 'active' || !m.expires_at) return false
+    const days = (new Date(m.expires_at).getTime() - now) / (1000 * 60 * 60 * 24)
+    return days >= 0 && days <= 30
+  }).length
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -43,8 +48,8 @@ export default async function AdminMembersPage() {
       <main className="max-w-7xl mx-auto px-6 py-8">
         <div className="grid grid-cols-3 gap-4 mb-8">
           <Stat label="総会員数" value={list.length} />
-          <Stat label="有効" value={activeCount} />
-          <Stat label="その他" value={list.length - activeCount} />
+          <Stat label="有効サポーター" value={activeCount} />
+          <Stat label="30日以内に期限切れ" value={expiringSoon} highlight={expiringSoon > 0} />
         </div>
 
         <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -54,7 +59,7 @@ export default async function AdminMembersPage() {
                 <th className="px-6 py-3">氏名</th>
                 <th className="px-6 py-3">メール</th>
                 <th className="px-6 py-3">ステータス</th>
-                <th className="px-6 py-3">次回更新</th>
+                <th className="px-6 py-3">有効期限</th>
                 <th className="px-6 py-3">登録日</th>
               </tr>
             </thead>
@@ -80,7 +85,7 @@ export default async function AdminMembersPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700">
-                      {m.current_period_end ? formatDate(m.current_period_end) : '—'}
+                      {m.expires_at ? formatDate(m.expires_at) : '—'}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700">{formatDate(m.registered_at)}</td>
                   </tr>
@@ -94,11 +99,11 @@ export default async function AdminMembersPage() {
   )
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
+function Stat({ label, value, highlight }: { label: string; value: number; highlight?: boolean }) {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className={`bg-white rounded-lg shadow p-6 ${highlight ? 'ring-2 ring-orange-400' : ''}`}>
       <div className="text-sm text-gray-600 mb-1">{label}</div>
-      <div className="text-3xl font-bold">{value}</div>
+      <div className={`text-3xl font-bold ${highlight ? 'text-orange-600' : ''}`}>{value}</div>
     </div>
   )
 }
