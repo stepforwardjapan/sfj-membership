@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-// Square支払いリンク URL（後で実URLに差し替え）
-const SUPPORT_URL = process.env.NEXT_PUBLIC_SUPPORT_URL ?? '#'
+// CTA遷移先（3つのプラン選択ページ）
+const SUPPORT_URL = '/join'
 
 export default function Home() {
   return (
@@ -257,53 +257,50 @@ function Benefits() {
 // Pricing
 // ───────────────────────────────────────────────
 function Pricing() {
+  const plans = [
+    { label: 'Individual', name: '個人会員', price: '¥30,000', per: '/ 年' },
+    { label: 'Corporate', name: '法人協賛', price: '¥300,000', per: '/ 年' },
+    { label: 'Donation', name: '寄付', price: '任意額', per: '' },
+  ]
   return (
     <section id="pricing" className="border-b border-[var(--color-border)]">
-      <div className="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-12 gap-12 items-center">
-        <div className="md:col-span-5">
+      <div className="max-w-6xl mx-auto px-6 py-28">
+        <div className="mb-16 max-w-2xl">
           <p className="eyebrow mb-6">Pricing</p>
           <h2
             className="font-display font-bold leading-[1.15] tracking-tight mb-6"
             style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)' }}
           >
-            挑戦サポーター制度
+            3つの関わり方
           </h2>
           <p className="text-[var(--color-text-muted)] leading-[1.9]">
-            個人・法人の区別はありません。法人契約での経費処理にも対応しています。
+            個人として、法人として、あるいは寄付として。ご自身に合うかたちで SFJ の活動を支えていただけます。
           </p>
         </div>
-        <div className="md:col-span-7">
-          <div className="border border-[var(--color-border)] p-10 md:p-14 bg-white">
-            <div className="flex items-end gap-3 mb-8">
-              <span className="font-display font-black text-5xl md:text-6xl text-[var(--color-text)]">
-                ¥30,000
-              </span>
-              <span className="text-[var(--color-text-muted)] mb-2 text-sm">/ 年（税込）</span>
+        <div className="grid md:grid-cols-3 gap-px bg-[var(--color-border)] border border-[var(--color-border)] mb-10">
+          {plans.map((p) => (
+            <div key={p.name} className="bg-white p-10">
+              <p className="eyebrow mb-5" style={{ color: 'var(--color-accent-dark)' }}>
+                {p.label}
+              </p>
+              <h3 className="font-display font-bold text-lg mb-6 text-[var(--color-text)]">{p.name}</h3>
+              <div className="flex items-end gap-2">
+                <span className="font-display font-black text-4xl text-[var(--color-text)]">{p.price}</span>
+                {p.per && <span className="text-xs text-[var(--color-text-muted)] mb-2">{p.per}</span>}
+              </div>
             </div>
-            <ul className="space-y-3 text-sm text-[var(--color-text-muted)] mb-10">
-              <li className="flex gap-3"><Check /> 公開収録 毎回無料 + 3名招待可</li>
-              <li className="flex gap-3"><Check /> SFJプロジェクト立ち上げ権</li>
-              <li className="flex gap-3"><Check /> Podcast ゲスト出演（年1回）</li>
-              <li className="flex gap-3"><Check /> 個人・法人共通 / 法人経費処理OK</li>
-            </ul>
-            <Link
-              href={SUPPORT_URL}
-              className="block w-full text-center bg-[var(--color-accent)] text-white py-4 text-sm hover:bg-[var(--color-accent-dark)] transition"
-            >
-              サポーターになる
-            </Link>
-          </div>
+          ))}
+        </div>
+        <div className="text-center">
+          <Link
+            href={SUPPORT_URL}
+            className="inline-block bg-[var(--color-accent)] text-white px-10 py-4 text-sm hover:bg-[var(--color-accent-dark)] transition"
+          >
+            詳細を見る・申し込む
+          </Link>
         </div>
       </div>
     </section>
-  )
-}
-
-function Check() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" className="flex-shrink-0 mt-1" aria-hidden>
-      <path d="M3 8L6.5 11.5L13 5" fill="none" stroke="var(--color-accent)" strokeWidth="1.5" />
-    </svg>
   )
 }
 
