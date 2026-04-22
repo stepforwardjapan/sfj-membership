@@ -1,20 +1,9 @@
 import type { Metadata } from 'next'
-import { Noto_Sans_JP, Raleway } from 'next/font/google'
 import './globals.css'
-
-const notoSansJP = Noto_Sans_JP({
-  variable: '--font-sans',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
-  display: 'swap',
-})
-
-const raleway = Raleway({
-  variable: '--font-display',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  display: 'swap',
-})
+// LINE Seed JP — 日本語・英数すべてに統一適用
+import '@fontsource/line-seed-jp/400.css'
+import '@fontsource/line-seed-jp/700.css'
+import '@fontsource/line-seed-jp/800.css'
 
 export const metadata: Metadata = {
   title: 'Step Forward Japan | 失敗できる社会の醸成',
@@ -33,10 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="ja"
-      className={`${notoSansJP.variable} ${raleway.variable} h-full antialiased`}
-    >
+    <html lang="ja" className="h-full antialiased">
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   )

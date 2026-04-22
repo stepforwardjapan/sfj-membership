@@ -3,7 +3,7 @@
 /*
  * SFJ Brand + Omata Design System
  * - Accent: teal #5bbfbf (single accent color, no exceptions)
- * - Typography: Noto Sans JP (JP) / Raleway (EN)
+ * - Typography: LINE Seed JP (日本語・英数すべて統一)
  * - Layout: 引き算の美学 — whitespace 1.5-2x, border-only dividers, no shadows
  */
 
@@ -21,9 +21,9 @@
   --color-accent-dark: #3d9999;
   --color-accent-tint: #edf8f8;
 
-  /* Fonts */
-  --font-sans: var(--font-sans), system-ui, sans-serif;
-  --font-display: var(--font-display), system-ui, sans-serif;
+  /* Fonts — LINE Seed JP only */
+  --font-sans: "LINE Seed JP", system-ui, -apple-system, sans-serif;
+  --font-display: "LINE Seed JP", system-ui, -apple-system, sans-serif;
 }
 
 body {
@@ -37,7 +37,7 @@ body {
 /* Labels & nav — uppercase with tracking */
 .eyebrow {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.6rem;
   line-height: 1;
   letter-spacing: 0.24em;
