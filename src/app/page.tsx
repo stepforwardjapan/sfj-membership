@@ -19,6 +19,7 @@ export default function Home() {
         <Hero />
         <About />
         <Podcast />
+        <Guests />
         <Events />
         <Benefits />
         <Pricing />
@@ -44,6 +45,7 @@ function SiteHeader() {
         <nav className="hidden md:flex items-center gap-10">
           <a href="#about" className="eyebrow hover:text-[var(--color-text)] transition">About</a>
           <a href="#podcast" className="eyebrow hover:text-[var(--color-text)] transition">Podcast</a>
+          <a href="#guests" className="eyebrow hover:text-[var(--color-text)] transition">Guests</a>
           <a href="#events" className="eyebrow hover:text-[var(--color-text)] transition">Events</a>
           <a href="#benefits" className="eyebrow hover:text-[var(--color-text)] transition">Benefits</a>
           <a href="#pricing" className="eyebrow hover:text-[var(--color-text)] transition">Pricing</a>
@@ -71,8 +73,8 @@ function Hero() {
             Step Forward Japan
           </p>
           <h1
-            className="font-bold leading-[1.05] tracking-tight mb-8"
-            style={{ fontSize: 'clamp(2.4rem, 6vw, 5rem)', fontWeight: 800 }}
+            className="leading-[1.15] tracking-tight mb-8"
+            style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 700 }}
           >
             失敗できる社会を、<br />
             一緒につくる。
@@ -143,7 +145,7 @@ function About() {
 function Metric({ value, label }: { value: string; label: string }) {
   return (
     <div className="pt-6">
-      <div className="font-bold text-[var(--color-text)] text-3xl md:text-4xl mb-1" style={{ fontWeight: 800 }}>
+      <div className="font-bold text-[var(--color-text)] text-3xl md:text-4xl mb-1" style={{ fontWeight: 700 }}>
         {value}
       </div>
       <div className="eyebrow">{label}</div>
@@ -195,9 +197,9 @@ function Podcast() {
 }
 
 // ───────────────────────────────────────────────
-// Real Events (新設) — ゲスト一覧を移管
+// Past Guests — 失敗の履歴書（Podcast + リアル）のこれまでのゲスト
 // ───────────────────────────────────────────────
-function Events() {
+function Guests() {
   const guests = [
     { name: '松永エリック・匡史', role: '青山学院大学 地球社会共生学部 学部長・教授' },
     { name: '豊田圭一', role: '株式会社スパイスアップ・ジャパン 代表取締役' },
@@ -207,27 +209,72 @@ function Events() {
     { name: '岡田兵吾', role: 'Microsoft Singapore APAC 責任者' },
   ]
   return (
-    <section id="events" className="border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
+    <section id="guests" className="border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
       <div className="max-w-6xl mx-auto px-6 py-28">
         <div className="grid md:grid-cols-12 gap-12 mb-16">
           <div className="md:col-span-4">
-            <p className="eyebrow mb-6">Real Events</p>
-            <h2 className="font-bold leading-[1.15] tracking-tight" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', fontWeight: 700 }}>
-              これまでの<br />リアルイベント登壇者
+            <p className="eyebrow mb-6">Past Guests</p>
+            <h2 className="leading-[1.15] tracking-tight" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', fontWeight: 700 }}>
+              失敗の履歴書<br />これまでのゲスト
             </h2>
           </div>
           <div className="md:col-span-8 text-[var(--color-text-muted)] space-y-4">
             <p>
-              年4回、第一線で挑戦を続けてきた方々をゲストにお招きし、リアルイベントを開催しています。
-              成功の裏側にある「失敗の意思決定」を、当事者の言葉で深く掘り下げる場です。
+              第一線で挑戦を続けてきた方々を、Podcast・リアル公開収録にお迎えしてきました。
+              成功の裏側にある「失敗の意思決定」を、当事者の言葉で深く掘り下げています。
             </p>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-border)] border border-[var(--color-border)]">
           {guests.map((g) => (
             <div key={g.name} className="bg-white p-6 hover:bg-[var(--color-bg)] transition">
-              <div className="font-semibold text-[var(--color-text)] mb-2" style={{ fontWeight: 700 }}>{g.name}</div>
+              <div className="text-[var(--color-text)] mb-2" style={{ fontWeight: 700 }}>{g.name}</div>
               <div className="text-xs text-[var(--color-text-muted)] leading-relaxed">{g.role}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ───────────────────────────────────────────────
+// Real Events — 年4回のリアルイベントの説明
+// ───────────────────────────────────────────────
+function Events() {
+  const themes = [
+    {
+      title: '失敗の履歴書 リアル版',
+      desc: 'Podcast「失敗の履歴書」のリアル開催回。ゲストと参加者の距離が近い、対話型のトークセッションです。',
+    },
+    {
+      title: '失敗できる組織をつくるワークショップ',
+      desc: '個人の挑戦だけでなく、それを支える「環境要因」に焦点を当てたワークショップ。組織・チーム・文化の観点から、失敗が歓迎される場の設計を探ります。',
+    },
+  ]
+  return (
+    <section id="events" className="border-b border-[var(--color-border)]">
+      <div className="max-w-6xl mx-auto px-6 py-28">
+        <div className="grid md:grid-cols-12 gap-12 mb-16">
+          <div className="md:col-span-4">
+            <p className="eyebrow mb-6">Real Events</p>
+            <h2 className="leading-[1.15] tracking-tight" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', fontWeight: 700 }}>
+              リアルイベント
+            </h2>
+          </div>
+          <div className="md:col-span-8 text-[var(--color-text-muted)] space-y-4">
+            <p>
+              年4回、テーマを設定したリアルイベントを開催しています。
+              挑戦する「個人」だけでなく、それを取り巻く「環境」の両面から、
+              失敗できる文化を探る場です。
+            </p>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-2 gap-px bg-[var(--color-border)] border border-[var(--color-border)]">
+          {themes.map((t) => (
+            <div key={t.title} className="bg-white p-8 md:p-10">
+              <h3 className="mb-4 text-[var(--color-text)]" style={{ fontWeight: 700 }}>{t.title}</h3>
+              <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">{t.desc}</p>
             </div>
           ))}
         </div>
@@ -272,7 +319,7 @@ function Benefits() {
         <div className="grid md:grid-cols-3 gap-px bg-[var(--color-border)] border border-[var(--color-border)]">
           {items.map((it) => (
             <div key={it.n} className="bg-white p-8 md:p-10">
-              <div className="font-bold text-2xl mb-4" style={{ color: 'var(--color-accent)', fontWeight: 800 }}>
+              <div className="font-bold text-2xl mb-4" style={{ color: 'var(--color-accent)', fontWeight: 700 }}>
                 {it.n}
               </div>
               <h3 className="font-semibold mb-4 text-[var(--color-text)]" style={{ fontWeight: 700 }}>{it.title}</h3>
@@ -318,7 +365,7 @@ function Pricing() {
               <p className="eyebrow mb-5" style={{ color: 'var(--color-accent-dark)' }}>{p.label}</p>
               <h3 className="font-bold text-lg mb-6 text-[var(--color-text)]" style={{ fontWeight: 700 }}>{p.name}</h3>
               <div className="flex items-end gap-2 mb-4">
-                <span className="font-black text-4xl text-[var(--color-text)]" style={{ fontWeight: 800 }}>{p.price}</span>
+                <span className="font-black text-4xl text-[var(--color-text)]" style={{ fontWeight: 700 }}>{p.price}</span>
                 {p.per && <span className="text-xs text-[var(--color-text-muted)] mb-2">{p.per}</span>}
               </div>
               {p.note && (

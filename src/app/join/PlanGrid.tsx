@@ -104,7 +104,7 @@ function PlanCard({ plan, agreed }: { plan: Plan; agreed: boolean }) {
               : 'bg-[var(--color-text)] text-white hover:opacity-85'
           }`}
         >
-          {plan.id === 'donation' ? 'Square で寄付する' : 'Square で申し込む'}
+          {plan.id === 'donation' ? '寄付する' : '申し込む'}
         </a>
       )}
     </div>

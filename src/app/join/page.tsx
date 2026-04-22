@@ -93,7 +93,6 @@ export default function JoinPage() {
             <p className="max-w-xl mx-auto text-[var(--color-text-muted)] leading-[1.9]">
               挑戦文化を、一緒につくる。
               ご自身に合うかたちを選んでお申込みください。
-              決済は Square のセキュアなページで完結します。
             </p>
           </div>
         </section>
@@ -122,8 +121,8 @@ export default function JoinPage() {
                 },
                 {
                   n: '02',
-                  t: 'Square で情報入力・決済',
-                  d: '遷移先の Square 決済ページで、お名前・メール・決済情報をご入力いただきます。入力いただいた情報は SFJ が会員管理のために受け取ります。',
+                  t: '情報入力・決済',
+                  d: '遷移先の決済ページで、お名前・メール・決済情報をご入力いただきます。入力いただいた情報は SFJ が会員管理のために受け取ります。',
                 },
                 {
                   n: '03',
