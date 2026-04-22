@@ -23,7 +23,6 @@ export default function Home() {
         <Events />
         <Benefits />
         <Pricing />
-        <Directors />
         <Faq />
         <FinalCta />
       </main>
@@ -381,76 +380,6 @@ function Pricing() {
           >
             詳細を見る・申し込む
           </Link>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ───────────────────────────────────────────────
-// Directors (各メンバーに「なぜSFJをやるのか」コメント枠を追加)
-// ───────────────────────────────────────────────
-function Directors() {
-  // ⚠️ quote は素材待ち — 各メンバーのヒアリング後に差し替え
-  const directors = [
-    {
-      name: '小俣 勇祐',
-      role: '代表理事 / ファシリテーター',
-      area: '経営・マーケティング・人材ビジネス',
-      quote: '（ここに小俣さんの「なぜSFJをやるのか」コメントを掲載予定）',
-    },
-    {
-      name: '押田 絵梨香',
-      role: '代表理事 / 企画&コミュニケーター',
-      area: '事業・組織づくり',
-      quote: '（ここに押田さんのコメントを掲載予定）',
-    },
-    {
-      name: '大川 彰一',
-      role: '理事 / 対外交渉',
-      area: 'グローバル人材育成・産学官連携',
-      quote: '（ここに大川さんのコメントを掲載予定）',
-    },
-    {
-      name: '樫村 周磨',
-      role: '理事 / イベント運営',
-      area: '人材採用・人事戦略',
-      quote: '（ここに樫村さんのコメントを掲載予定）',
-    },
-    {
-      name: 'デューク',
-      role: '理事',
-      area: '人材ビジネス',
-      quote: '（ここにデュークさんのコメントを掲載予定）',
-    },
-  ]
-  return (
-    <section className="border-b border-[var(--color-border)]">
-      <div className="max-w-6xl mx-auto px-6 py-28">
-        <div className="mb-16 max-w-2xl">
-          <p className="eyebrow mb-6">Directors</p>
-          <h2 className="font-bold leading-[1.15] tracking-tight" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', fontWeight: 700 }}>
-            運営メンバー
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--color-border)] border border-[var(--color-border)]">
-          {directors.map((d) => (
-            <div key={d.name} className="bg-white p-8 md:p-10">
-              <div className="grid grid-cols-[auto,1fr] gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-[var(--color-bg-secondary)] border border-[var(--color-border)]" aria-hidden />
-                </div>
-                <div>
-                  <div className="font-semibold mb-1 text-[var(--color-text)]" style={{ fontWeight: 700 }}>{d.name}</div>
-                  <div className="eyebrow mb-2">{d.role}</div>
-                  <div className="text-xs text-[var(--color-text-muted)] leading-relaxed mb-4">{d.area}</div>
-                  <p className="text-sm text-[var(--color-text)] leading-relaxed border-l-2 border-[var(--color-accent)] pl-4">
-                    {d.quote}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
